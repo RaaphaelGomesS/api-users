@@ -20,9 +20,9 @@ class User {
         .select(["id", "name", "email", "role"])
         .where({ id: id })
         .table("users");
-      if(result.length > 0){
+      if (result.length > 0) {
         return result[0];
-      }else{
+      } else {
         return undefined;
       }
     } catch (error) {
@@ -58,6 +58,55 @@ class User {
     } catch (error) {
       console.log(err);
       return false;
+    }
+  }
+
+  async update(id, email, name, role) {
+    const user = await this.findById(id);
+
+    if (user != undefined) {
+      const editUser = {};
+
+      if (email != undefined) {
+        if (email != user.email) {
+          const result = await this.findEmail(email);
+          if (result == false) {
+            editUser.email = email;
+          } else {
+            return { status: false, err: "O email já está cadastrado!" };
+          }
+        }
+
+        if (name != undefined) {
+          editUser.name = name;
+        }
+
+        if (role != undefined) {
+          editUser.role = role;
+        }
+        try {
+          await knex.update(editUser).where({ id: id }).table("users");
+          return { status: true };
+        } catch (error) {
+          return { status: false, error };
+        }
+      } else {
+        return { status: false, err: "O usuário não existe!" };
+      }
+    }
+  }
+
+  async delete(id) {
+    const user = await this.findById(id);
+    if (user != undefined) {
+      try {
+        await knex.delete().where({ id: id }).table("users");
+        return {status: true};
+      } catch (error) {
+        return { status: false, err: err };
+      }
+    } else {
+      return { status: false, err: "O usuário não existe!" };
     }
   }
 }

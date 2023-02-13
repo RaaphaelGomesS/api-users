@@ -39,6 +39,36 @@ class UserController {
       res.json({ msg: "Usuário criado!" });
     }
   }
+
+  async edit(req, res) {
+    const { id, name, role, email } = req.body;
+    const result = await User.update(id, email, name, role);
+
+    if (result != undefined) {
+      if (result.status) {
+        res.send("Tudo ok!");
+      } else {
+        res.status(406);
+        res.send(result.err);
+      }
+    } else {
+      res.status(406);
+      res.send("Ocorreu um erro no servidor");
+    }
+  }
+
+  async remove(req, res) {
+    var id = req.params.id;
+
+    const result = await User.delete(id);
+    if (result.status) {
+      res.status(200);
+      res.send("Deletado com sucesso!");
+    }else{
+      res.status(406);
+      res.send(result.err);
+    }
+  }
 }
 
 module.exports = new UserController();
