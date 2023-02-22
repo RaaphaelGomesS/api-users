@@ -1,4 +1,4 @@
-var knex = require("../database/connection.js");
+const knex = require("../database/connection.js");
 const User = require("./User.js");
 
 class PasswordToken {
