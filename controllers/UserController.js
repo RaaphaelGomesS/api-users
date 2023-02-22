@@ -1,4 +1,5 @@
 var User = require("../services/User.js");
+var PasswordToken = require("../services/PasswordToken.js");
 
 class UserController {
   async index(req, res) {
@@ -20,7 +21,7 @@ class UserController {
   }
 
   async create(req, res) {
-    const { email, name, password } = req.body;
+    const { email, password, name } = req.body;
 
     if (email == undefined) {
       res.status(400);
@@ -34,7 +35,7 @@ class UserController {
       res.status(406);
       res.json({ err: "o email já está cadastrado!" });
     } else if (emailExist == false) {
-      await User.new(email, name, password);
+      await User.new(email, password, name);
       res.status(200);
       res.json({ msg: "Usuário criado!" });
     }
@@ -64,9 +65,42 @@ class UserController {
     if (result.status) {
       res.status(200);
       res.send("Deletado com sucesso!");
-    }else{
+    } else {
       res.status(406);
       res.send(result.err);
+    }
+  }
+
+  async recoverPassword(req, res) {
+    const email = req.body.email;
+    const result = await PasswordToken.create(email);
+
+    if (result.status) {
+      res.status(200);
+      res.send("" + result.token);
+    } else {
+      res.status(406);
+      res.send(result.err);
+    }
+  }
+
+  async changePassword(req, res) {
+    var token = req.body.token;
+    var password = req.body.password;
+
+    var isTokenValid = await PasswordToken.validate(token);
+
+    if (isTokenValid.status) {
+      await User.changePassword(
+        password,
+        isTokenValid.token.user_id,
+        isTokenValid.token.token
+      );
+      res.status(200);
+      res.json({ msg: "senha alterada!" });
+    } else {
+      res.status(406);
+      res.json({ msg: "Token inválido!" });
     }
   }
 }
