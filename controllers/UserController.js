@@ -2,6 +2,7 @@ const User = require("../services/User.js");
 const PasswordToken = require("../services/PasswordToken.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+// const config = require("../.env");
 
 const secret = "senha_secreta";
 
