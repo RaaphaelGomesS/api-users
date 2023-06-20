@@ -21,7 +21,7 @@ class User {
         .select(["id", "email", "role", "name"])
         .where({ id: id })
         .table("users");
-      if (result.length > 0) {
+      if (result.length > 0) { 
         return result[0];
       } else {
         return undefined;
@@ -53,9 +53,7 @@ class User {
     try {
       var hash = await bcrypt.hash(password, 10);
 
-      await knex
-        .insert({ email, password: hash, name, role })
-        .table("users");
+      await knex.insert({ email, password: hash, name, role }).table("users");
     } catch (err) {
       console.log(err);
     }
@@ -63,12 +61,9 @@ class User {
 
   async findEmail(email) {
     try {
-      var result = await knex
-        .select("*")
-        .from("users")
-        .where({ email: email });
+      var result = await knex.select("*").from("users").where({ email: email });
 
-        console.log(result)
+      console.log(result);
 
       if (result.length > 0) {
         return true;
@@ -103,8 +98,8 @@ class User {
           } else {
             return { status: false, err: "O email já está cadastrado!" };
           }
-        }else{
-          return { status: false, err: "Atualize o email!" }
+        } else {
+          return { status: false, err: "Atualize o email!" };
         }
 
         try {
@@ -128,7 +123,7 @@ class User {
         await knex.delete().where({ id: id }).table("users");
         return { status: true };
       } catch (error) {
-        return { status: false, err: "O usuário não existe!" };
+        return { status: false, err: "O usuário não foi encontrado!" };
       }
     } else {
       return { status: false, err: "O usuário não existe!" };

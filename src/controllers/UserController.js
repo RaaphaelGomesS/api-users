@@ -64,14 +64,14 @@ class UserController {
   }
 
   async remove(req, res) {
-    var id = req.params.id;
+    const id = req.params.id;
 
     const result = await User.delete(id);
     if (result.status) {
       res.status(200);
       res.json({ msg: "Deletado com sucesso!" });
     } else {
-      res.status(406);
+      res.status(404);
       res.json({ err: result.err });
     }
   }
