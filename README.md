@@ -191,12 +191,12 @@ Para conseguir o retorno esperado, no headers da requisição deve ser passado o
 #### OK! 200
 Se o id estiver no banco será recebido a seguinte resposta.
 ```
-    {
-		"id": 1,
-		"email": "exemplo@gmail.com",
-		"role": 1,
-		"name": "Exemplo"
-	}
+{
+	"id": 1,
+	"email": "exemplo@gmail.com",
+	"role": 1,
+	"name": "Exemplo"
+}
 ```
 ### PUT /user
 Utilize para alterar o email do usuário (Essa rota só é acessível ao admin e precisa do token de auth).
