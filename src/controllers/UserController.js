@@ -52,10 +52,10 @@ class UserController {
 
     if (result != undefined) {
       if (result.status) {
-        res.json({msg: "Conta alterada!", user: result.user});
+        res.json({ msg: "Conta alterada!", user: result.user });
       } else {
         res.status(406);
-        res.json({err: result.err});
+        res.json({ err: result.err });
       }
     } else {
       res.status(406);
@@ -69,10 +69,10 @@ class UserController {
     const result = await User.delete(id);
     if (result.status) {
       res.status(200);
-      res.send("Deletado com sucesso!");
+      res.json({ msg: "Deletado com sucesso!" });
     } else {
       res.status(406);
-      res.send(result.err);
+      res.json({ err: result.err });
     }
   }
 
@@ -82,10 +82,10 @@ class UserController {
 
     if (result.status) {
       res.status(200);
-      res.send("" + result.token);
+      res.json({ token: "" + result.token });
     } else {
       res.status(406);
-      res.send(result.err);
+      res.json({ err: result.err });
     }
   }
 

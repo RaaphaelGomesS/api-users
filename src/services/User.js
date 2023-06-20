@@ -128,7 +128,7 @@ class User {
         await knex.delete().where({ id: id }).table("users");
         return { status: true };
       } catch (error) {
-        return { status: false, err: err };
+        return { status: false, err: "O usuário não existe!" };
       }
     } else {
       return { status: false, err: "O usuário não existe!" };

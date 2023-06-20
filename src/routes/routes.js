@@ -9,7 +9,7 @@ router.post("/recover", UserController.recoverPassword);
 router.post("/change", UserController.changePassword);
 
 router.put("/user", AdminAuth, UserController.edit);
-router.delete("/user:id", AdminAuth, UserController.remove);
+router.delete("/user/:id", AdminAuth, UserController.remove);
 router.get("/users", AdminAuth, UserController.index);
 router.get("/user/:id", AdminAuth, UserController.findUser);
 
