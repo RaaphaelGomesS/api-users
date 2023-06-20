@@ -16,16 +16,16 @@ export default function (req, res, next) {
         next();
       } else {
         res.status(403);
-        res.json({ msg: "Você não tem permissão para essa rota!" });
+        res.json({ err: "Você não tem permissão para essa rota!" });
       }
     } catch (error) {
       res.status(403);
-      res.json({ msg: "Você não está autenticado" });
+      res.json({ err: "Você não está autenticado" });
       return;
     }
   } else {
     res.status(403);
-    res.json({ msg: "Você não está autenticado" });
+    res.json({ err: "Você não está autenticado" });
     return;
   }
 }

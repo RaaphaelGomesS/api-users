@@ -26,7 +26,7 @@ class UserController {
   }
 
   async create(req, res) {
-    const { email, password, name } = req.body;
+    const { email, password, name, role } = req.body;
 
     if (email == undefined) {
       res.status(400);
@@ -40,7 +40,7 @@ class UserController {
       res.status(406);
       res.json({ err: "o email já está cadastrado!" });
     } else if (emailExist == false) {
-      await User.new(email, password, name);
+      await User.new(email, password, name, role);
       res.status(200);
       res.json({ msg: "Usuário criado!" });
     }
