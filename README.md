@@ -76,7 +76,7 @@ email, nome, senha e role (1 para conta Admin e 0 para conta normal / Nome e rol
 	"name": "exemplo",
 	"email": "exemplo1@gmail.com",
 	"password": "1234",
-    "role": 0
+    	"role": 0
  }
 ```
 #### Resposta esperada
@@ -105,8 +105,8 @@ Login sendo realizado com sucesso, essa mensagem será retornada.
 ```
 {
 	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwi
-    ZW1haWwiOiJleGVtcGxvMUBnbWFpbC5jb20iLCJpYXQiOjE2NzQzODE3MTh
-    9.6NJUOlIu26ER8_GgYE5dMtbtX7vc6JUJl4lR-Yz5fUf"
+	ZW1haWwiOiJleGVtcGxvMUBnbWFpbC5jb20iLCJpYXQiOjE2NzQzODE3MTh
+	9.6NJUOlIu26ER8_GgYE5dMtbtX7vc6JUJl4lR-Yz5fUf"
 }
 ```
 
@@ -211,7 +211,8 @@ Caso os campos estejam preenchidos e o email fora alterado, a seguinte resposta 
 ```
 {
 	"msg": "Conta alterada!",
-	"user": {
+	"user":
+	{
 		"role": 1,
 		"name": "ExemploAtualizado",
 		"email": "exemploAtualizado@gmail.com"
@@ -231,6 +232,6 @@ Para conseguir o retorno esperado, no headers da requisição deve ser passado o
 Caso o Id esteja no banco de dados a seguinte mensagem será retornada.
 ```
 { 
-    msg: "Deletado com sucesso!" 
+    	msg: "Deletado com sucesso!" 
 }
 ```
